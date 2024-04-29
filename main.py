@@ -178,3 +178,110 @@ for name, model in models.items():
     print("Classification Report:")
     print(report)
 
+# nural network
+
+nn_model = Sequential([
+    Dense(128, input_dim=X.shape[1], activation='relu'),
+    Dropout(0.2),
+    Dense(64, activation='relu'),
+    BatchNormalization(),
+    Dense(32, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+
+nn_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = nn_model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2, verbose=0)
+
+# Evaluate the model
+_, accuracy = nn_model.evaluate(X_test, y_test)
+print(f"Neural Network Accuracy: {accuracy}")
+
+# Plot training history
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label='val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()
+
+# Under sampling
+undersample = RandomUnderSampler(sampling_strategy='majority')
+X_resampled, y_resampled = undersample.fit_resample(X_scaled, y)
+
+# Model Training and Evaluation
+X_train, X_test, y_train, y_test = train_test_split(X_resampled, y_resampled, test_size=0.3, random_state=42)
+
+# Initialize models
+randf_classifier = RandomForestClassifier(random_state=42)
+adb_classifier = AdaBoostClassifier(random_state=42)
+log_reg = LogisticRegression()
+svm_clf = SVC()
+
+models = {
+    'RandomForest Classifier': randf_classifier,
+    'AdaBoost Classifier': adb_classifier,
+    'Logistic Regression': log_reg,
+    'SVM Classifier': svm_clf
+}
+
+best_models = {}
+
+for name, model in models.items():
+    params = {}
+    if name == 'RandomForest Classifier':
+        params = {'n_estimators': [100, 200, 300], 'max_depth': [None, 5, 10]}
+    elif name == 'AdaBoost Classifier':
+        params = {'n_estimators': [50, 100, 150], 'learning_rate': [0.1, 0.5, 1.0]}
+    elif name == 'Logistic Regression':
+        params = {'C': [0.1, 1, 10]}
+    elif name == 'SVM Classifier':
+        params = {'C': [0.1, 1, 10], 'kernel': ['linear', 'rbf']}
+    
+    grid_search = GridSearchCV(model, param_grid=params, cv=5, scoring='accuracy')
+    grid_search.fit(X_train, y_train)
+    best_models[name] = grid_search.best_estimator_
+    
+    print(f"Best parameters for {name}: {grid_search.best_params_}")
+    print(f"Best cross-validation accuracy: {grid_search.best_score_}")
+    print("="*50)
+    
+    # Evaluate best model
+    y_pred = best_models[name].predict(X_test)
+    balanced_accuracy = balanced_accuracy_score(y_test, y_pred)
+    report = classification_report(y_test, y_pred, target_names=['Not Charged Off', 'Charged Off'], output_dict=True)
+    
+    print(f"{name} Metrics:")
+    print(f"Balanced Accuracy: {balanced_accuracy}")
+    print("Classification Report:")
+    print(report)
+
+# Neural Network Model
+nn_model = Sequential([
+    Dense(128, input_dim=X.shape[1], activation='relu'),
+    Dropout(0.2),
+    Dense(64, activation='relu'),
+    BatchNormalization(),
+    Dense(32, activation='relu'),
+    Dense(1, activation='sigmoid')
+])
+
+nn_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Train the model
+history = nn_model.fit(X_train, y_train, epochs=100, batch_size=32, validation_split=0.2, verbose=0)
+
+# Evaluate the model
+_, accuracy = nn_model.evaluate(X_test, y_test)
+print(f"Neural Network Accuracy: {accuracy}")
+
+# Plot training history
+plt.plot(history.history['accuracy'], label='accuracy')
+plt.plot(history.history['val_accuracy'], label='val_accuracy')
+plt.xlabel('Epoch')
+plt.ylabel('Accuracy')
+plt.legend()
+plt.show()
+    
+
