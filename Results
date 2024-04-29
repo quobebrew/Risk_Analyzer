@@ -1,0 +1,67 @@
+# Loan Default Prediction Model Evaluation
+
+## Overview
+
+This project aims to build and evaluate machine learning models for predicting loan default. The dataset used contains information about loan applicants, including their demographics, financial information, and loan status.
+
+## Analysis
+
+### Data Inspection and Cleaning
+
+The dataset was inspected to understand its structure and identify missing values. Missing values were handled using forward fill and dropping rows with remaining missing values. Categorical columns were converted to string type.
+
+### Data Analysis
+
+Summary statistics for numeric columns were computed to understand the distribution of data. Horizontal bar plots were created to visualize the frequency of each category for object columns.
+
+### Data Transformation
+
+One-hot encoding was applied to encode categorical variables. The cleaned and transformed dataset was saved to a CSV file.
+
+### Model Training and Evaluation
+
+Four machine learning models were trained and evaluated: Random Forest, AdaBoost, Logistic Regression, and Support Vector Machine (SVM). Hyperparameter tuning was performed using GridSearchCV to find the best parameters for each model. The neural network model was trained and evaluated separately.
+
+Evaluation metrics used include balanced accuracy, accuracy, and recall.
+
+### Results
+
+#### Random Forest Classifier
+- Best parameters: {'max_depth': None, 'n_estimators': 100}
+- Best cross-validation accuracy: 0.9821
+- Balanced Accuracy: 0.5
+- Accuracy: 0.9823
+- Recall for Class 0: 1.0
+- Recall for Class 1: 0.0
+
+#### AdaBoost Classifier
+- Best parameters: {'learning_rate': 1.0, 'n_estimators': 50}
+- Best cross-validation accuracy: 0.9856
+- Balanced Accuracy: 0.6317
+- Accuracy: 0.9863
+- Recall for Class 0: 0.9993
+- Recall for Class 1: 0.2642
+
+#### Logistic Regression
+- Best parameters: {'C': 10}
+- Best cross-validation accuracy: 0.9773
+- Balanced Accuracy: 0.6268
+- Accuracy: 0.9767
+- Recall for Class 0: 0.9895
+- Recall for Class 1: 0.2642
+
+#### SVM Classifier
+- Best parameters: {'C': 10, 'kernel': 'rbf'}
+- Best cross-validation accuracy: 0.9846
+- Balanced Accuracy: 0.5376
+- Accuracy: 0.9833
+- Recall for Class 0: 0.9997
+- Recall for Class 1: 0.0755
+
+#### Neural Network
+- Best cross-validation accuracy: N/A
+- Accuracy: N/A
+- Recall for Class 0: N/A
+- Recall for Class 1: N/A
+
+Based on the evaluation results, the AdaBoost Classifier achieved the highest recall for predicting loan default, with a recall score of 0.264 for Class 1.
