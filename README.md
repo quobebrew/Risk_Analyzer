@@ -1,29 +1,51 @@
-# Credit Risk Assessment using ML models
+# Credit Risk Analyzer
 
-The project aims to develop a machine learning model to assess credit risk for loan applicants. By analyzing historical loan data, the model will predict the likelihood of default or delinquency for new applicants, helping financial institutions make more informed lending decisions.
+## Project Overview
 
-## Datasets:
-- **Lending Club Data**: Obtain historical loan data from Lending Club, a peer-to-peer lending platform. The dataset typically includes information on loan applicants, loan terms, credit scores, employment details, and loan performance (e.g., repayment status, defaults).
-- 
-[OpenIntro - Loans Full Schema Dataset](https://www.openintro.org/data/index.php?data=loans_full_schema)
+This project focuses on developing a machine learning model to assess credit risk for loan applicants. Credit risk is a crucial concern for financial institutions, as even approved loans carry the risk of default, impacting the institution's bottom line. By predicting the likelihood of default or non-performance for active loans, financial firms can proactively manage their risk exposure.
 
+## Dataset and Problem Statement
 
-## Data Preparation:
-- Merge and preprocess the datasets to create a unified dataset for analysis.
-- Handle missing values, outliers, and inconsistencies in the data.
-- Feature engineering: Extract relevant features such as debt-to-income ratio, loan-to-value ratio, and length of credit history.
-- Encode categorical variables and normalize numerical features as needed.
+The dataset used for this analysis comprises 10,000 records from Lending Club, a peer-to-peer lending platform. The target variable is the "Loan Status" column, which includes categories such as Paid Off, Current, In Grace Period, Late, and Charged Off. The goal is to predict the risk category of each loan, with '0' denoting healthy loans and '1' indicating loans at risk of default.
 
-## Machine Learning:
-- Split the dataset into training and testing sets.
-- Explore various machine learning algorithms suitable for classification tasks, such as logistic regression, decision trees, random forests, and gradient boosting machines.
-- Train multiple models using the training data and evaluate their performance using metrics like accuracy, precision, recall, F1-score, and ROC-AUC.
-- Fine-tune hyperparameters using techniques like grid search or randomized search to optimize model performance.
+Dataset Link: [Lending Club Data - Loans Full Schema Dataset](https://www.openintro.org/data/index.php?data=loans_full_schema)
 
-## Model Interpretation:
-- Use techniques like feature importance or SHAP values to interpret the model's decisions and understand the factors driving credit risk assessment.
+## Data Preprocessing and Cleansing
 
-## Documentation and Presentation:
-- Document the data collection, preprocessing, and modeling steps in detail.
-- Create a README.md file in your GitHub repository summarizing the project overview, dataset sources, methodology, and key findings.
-- Prepare a presentation summarizing the project goals, methodology, model performance, and insights gained from the analysis. Consider visualizations and examples to illustrate your findings effectively.
+The dataset undergoes thorough preprocessing and cleansing:
+- Null values are handled appropriately, and categorical variables are encoded.
+- The target variable is reshaped to create a binary classification of healthy and risky loans.
+- Numerical features are scaled using ScikitLearn's standard scaler.
+- The dataset is rebalanced to address the heavily imbalanced nature of the risk category variable.
+
+## Data Analysis and Visualization
+
+- Summary statistics for numeric columns are computed.
+- Horizontal bar plots visualize the frequency of each category for object columns, providing insights into the distribution of categorical variables.
+
+## Machine Learning Models
+
+Several machine learning models are trained and evaluated:
+- Support Vector Machine (SVM)
+- Logistic Regression
+- ADA Boost
+- Random Forest
+- Neural Networks
+
+Each model is assessed based on metrics such as precision, recall, F1-score, and balanced accuracy score.
+
+## Model Validation and Comparison
+
+K-Fold Cross Validation is employed to validate and compare the performance of the models. The aim is to select the model with the highest predictive accuracy and robustness for credit risk assessment.
+
+## Key Findings
+
+- The AdaBoost Classifier emerged as the best-performing model with a balanced accuracy score of 0.63, showcasing promising potential for accurately predicting credit risk.
+- Data preprocessing techniques, including feature scaling and rebalancing, significantly improved model performance and generalization.
+- Neural network models exhibited competitive performance but required more computational resources and longer training times compared to traditional machine learning algorithms.
+- Interpretability of the models varied, with decision tree-based models such as Random Forest providing insight into feature importance for credit risk assessment.
+
+## Conclusion
+
+The project aims to provide financial institutions with a reliable tool for assessing credit risk, enabling them to make informed lending decisions and mitigate potential losses due to loan defaults. Through meticulous data preprocessing, model training, and validation, the project strives to deliver actionable insights that contribute to the stability and sustainability of financial operations.
+
