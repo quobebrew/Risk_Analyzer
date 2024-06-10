@@ -49,3 +49,4 @@ K-Fold Cross Validation is employed to validate and compare the performance of t
 
 The project aims to provide financial institutions with a reliable tool for assessing credit risk, enabling them to make informed lending decisions and mitigate potential losses due to loan defaults. Through meticulous data preprocessing, model training, and validation, the project strives to deliver actionable insights that contribute to the stability and sustainability of financial operations.
 
+The Results Can be seen in main.ipynb
